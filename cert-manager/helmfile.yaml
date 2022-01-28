@@ -1,0 +1,16 @@
+repositories:
+  - name: jetstack
+    url: https://charts.jetstack.io
+
+releases:
+  - namespace: cert-manager
+    name: cert-manager
+    chart: jetstack/cert-manager
+    version: 1.5.3
+    values:
+      - "./values.yaml"
+    hooks:
+      - events: [ "prepare" ]
+        showlogs: true
+        command: "kubectl"
+        args: [ "create", "namespace", "cert-manager" ]
